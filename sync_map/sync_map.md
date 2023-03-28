@@ -8,6 +8,6 @@ mutex+原生map增加心智负担，需要自己去LOCK，UNLOCK，新司机可�
 
 sync.Map更加适合读多、更新多、删多、写少的场景。
 
-不适合频繁写的场景，这种场景，sync.Map不仅基本等价于mutex+map，且需要承担 read 和 dirty 字段之间数据转换的额外开销。如果数据量很大，read
+不适合频繁写的场景。频繁写的场景，sync.Map不仅基本等价于mutex+map，且需要承担 read 和 dirty 字段之间数据转换的额外开销。如果数据量很大，read
 和 dirty 字段之间数据转换还可能会导致性能抖动。
 
