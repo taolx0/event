@@ -13,7 +13,6 @@ import (
 )
 
 func main() {
-
 	// Capture starting number of goroutines.
 	startingGs := runtime.NumGoroutine()
 
@@ -51,13 +50,13 @@ func process(term string) error {
 	defer cancel()
 
 	// Make a channel for the goroutine to report its result.
-	ch := make(chan result, 1)
+	ch := make(chan result)
 
 	// Launch a goroutine to find the record. Create a result
 	// from the returned values to send through the channel.
 	go func() {
 		record, err := search(term)
-		fmt.Printf("record: %v, err: %v", record, err)
+		fmt.Printf("record: %v, err: %v\n", record, err)
 		ch <- result{record, err}
 		fmt.Printf("ch: %v", ch)
 	}()
