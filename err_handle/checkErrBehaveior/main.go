@@ -2,17 +2,23 @@ package main
 
 import "errors"
 
+var timeout = 3 //minutes
+
 type timeoutError interface {
 	error
 	Timeout() bool // Is the error a timeout?
 }
 
 type errorHandler struct {
-	err error
+	time int
+	err  error
 }
 
 func (e *errorHandler) Timeout() bool {
-	return true
+	if e.time > timeout {
+		return true
+	}
+	return false
 }
 
 func (e *errorHandler) Error() string {
@@ -26,7 +32,8 @@ func isTimeout(err error) bool {
 
 func main() {
 	e := &errorHandler{
-		err: errors.New("timeout error"),
+		time: 4,
+		err:  errors.New("timeout error"),
 	}
 
 	if isTimeout(e) {
