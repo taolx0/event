@@ -37,7 +37,7 @@ func TestIterateRange(t *testing.T) {
 }
 ```
 
-2. for 循环嵌套 switch,select. switch ,select 内部 break 只会跳出 switch,select，不会跳出 for 循环。使用标签跳出 for 循环。
+2. for 循环嵌套 switch,select内部 break 只会跳出 switch,select，不会跳出 for 循环。使用标签跳出 for 循环。
 
 ```
 func TestNestSwitchWithLoop(t *testing.T) {
