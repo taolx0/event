@@ -1,0 +1,11 @@
+/* ApplicationName=DataGrip 2023.1.2 */ UPDATE sqle.test INNER JOIN (SELECT '2' AS id, SLEEP(11)) a ON test.id = a.id
+SET test.name='xiaowang',
+    test.age = 18,
+    test.id  = 2
+WHERE name = 'test';
+SET timestamp=1686712900;
+/* ApplicationName=DataGrip 2023.1.2 */ SELECT SLEEP(10);
+# Time: 2023-06-14T03:11:38.329291Z
+# User@Host: root[root] @ localhost [127.0.0.1]  Id: 37446
+# Query_time: 11.005341  Lock_time: 0.000000 Rows_sent: 1  Rows_examined: 1
+SET timestamp=1686712287;
