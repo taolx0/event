@@ -2,25 +2,30 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"time"
 )
 
 func main() {
-	timeout, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
 
-	doSomething(timeout)
+	doSomething(ctx)
 
-	select {
-	case <-timeout.Done():
-		fmt.Println("timeout")
-		break
+	if errors.Is(ctx.Err(), context.DeadlineExceeded) {
+		println("deadline exceeded")
 	}
-
-	fmt.Println("Done")
 }
 
 func doSomething(ctx context.Context) {
-	ctx.Done()
+	for {
+		select {
+		case <-ctx.Done():
+			println(ctx.Err().Error())
+			return
+		default:
+			println("default")
+			return
+		}
+	}
 }

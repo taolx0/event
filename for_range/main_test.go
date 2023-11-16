@@ -45,3 +45,18 @@ func Benchmark_testSlice(b *testing.B) {
 		}
 	}
 }
+
+func TestSyncMap(t *testing.T) {
+	s1 := "test1"
+	s2 := "test2"
+	ss := []string{s1, s2}
+
+	var copySS []string
+	for _, s := range ss {
+		copySS = append(copySS, s)
+	}
+
+	for _, s := range copySS {
+		println(s)
+	}
+}

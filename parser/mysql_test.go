@@ -1,15 +1,26 @@
 package main
 
 import (
+	"strings"
+	"testing"
+
 	"github.com/pingcap/tidb/parser"
 	"github.com/pingcap/tidb/parser/ast"
+	"github.com/pingcap/tidb/parser/charset"
 	"github.com/pingcap/tidb/parser/format"
 	"github.com/pingcap/tidb/types"
 	_ "github.com/pingcap/tidb/types/parser_driver"
 	driver "github.com/pingcap/tidb/types/parser_driver"
-	"strings"
-	"testing"
 )
+
+// https://docs.pingcap.com/zh/tidb/dev/mysql-compatibility
+func TestGeometry(t *testing.T) {
+	p1 := parser.New()
+	_, _, err := p1.Parse("CREATE TABLE test (`theGeom` varchar(255) DEFAULT NULL) ENGINE = InnoDB\n  DEFAULT CHARSET = utf8mb3\n  COLLATE = utf8mb3_bin\n  ROW_FORMAT = DYNAMIC COMMENT ='用户表';", charset.CharsetUTF8MB3, "")
+	if err != nil {
+		panic(err)
+	}
+}
 
 func TestParser1(t *testing.T) {
 	p1 := parser.New()

@@ -1,17 +1,15 @@
 package main
 
-var m = map[string]string{
-	"foo": "bar",
-	"t":   "bar",
-	"baz": "bar",
-}
-
-var m2 = []string{"foo", "t", "baz"}
+import (
+	"fmt"
+)
 
 func main() {
-	if v, ok := m["t"]; ok {
-		println(v)
-		m["t"] = "bar"
+	query := "SELECT * FROM tbl_sensor WHERE device = 'device1' AND ts BETWEEN '2022-01-01' AND '2022-02-01'"
+	formattedQuery, err := sqlfmt.(query)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
 	}
-	println(m["t"])
+	fmt.Println("Formatted query:\n", formattedQuery)
 }
