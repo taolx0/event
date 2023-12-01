@@ -64,7 +64,9 @@ func (c Customer) Validate() error {
 }
 ```
 
-原因:MultiError是nil,error接口值是非nil.Golang的方法是一个语法糖的设计,Golang方法等同于第一个参数是方法接收者的函数.即使方法接收者是nil,方法依然可以被正常调用.
+原因:错误类型结构体MultiError是nil,error接口值是非nil.
+
+解决方法:如果error是nil,直接返回nil值,不要返回error接口值.
 
 
 
