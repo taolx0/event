@@ -6,7 +6,7 @@
 type slice struct {
 	ptr unsafe.Pointer // 指向被引用底层数组的指针
 	len int            // 长度
-	cap int            // 容量, 从ptr开始到被引用数组末尾的长度
+	cap int            // 容量, 从ptr开始到被引用数组末尾的长度t
 }
 ```
 
