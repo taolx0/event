@@ -4,24 +4,46 @@
 package main
 
 import (
-	"fmt"
 	"time"
-
-	"golang.org/x/net/context"
 )
 
+var s1 = `
+ 	[
+      {
+        "data": [
+          "ddl_avoid_full_text",
+          "MySQL",
+          "禁止使用全文索引",
+          "全文索引的使用会增加存储开销，并对写操作性能产生一定影响。",
+          "error",
+          "使用建议",
+          null,
+          "150",
+          "1",
+          "0"
+        ]
+      },
+      {
+        "data": [
+          "ddl_avoid_geometry",
+          "MySQL",
+          "禁止使用空间字段和空间索引",
+          "使用空间字段和空间索引会增加存储需求，对数据库性能造成一定影响",
+          "error",
+          "使用建议",
+          null,
+          "151",
+          "1",
+          "0"
+        ]
+      }
+    ]
+`
+
+type DataItem struct {
+	Data []interface{} `json:"data"`
+}
+
 func main() {
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-	defer cancel()
-
-	for {
-		select {
-		case <-ctx.Done():
-			fmt.Printf("context done: %v", ctx.Err())
-			return
-
-		case <-time.After(1 * time.Second):
-			fmt.Println("time.After 1s")
-		}
-	}
+	println(time.Now().Format("20060102150405.000"))
 }
